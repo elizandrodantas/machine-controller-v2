@@ -39,6 +39,7 @@ func GetEnv() (env Env, err error) {
 	viper.SetDefault("JWT_TOKEN", "default_token")
 	viper.SetDefault("JWT_EXPIRE_HOUR", "24")
 	viper.SetDefault("TOKEN_TYPE", "Bearer")
+	viper.SetDefault("DB_URL", "")
 
 	if _, err = os.Stat(".env"); err == nil {
 		viper.SetConfigFile(".env")
