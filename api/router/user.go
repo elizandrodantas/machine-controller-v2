@@ -22,7 +22,10 @@ func NewUserRouter(g *gin.RouterGroup, env *config.Env, pool *pgxpool.Pool, time
 		Timeout:     timeout,
 	}
 
-	g.POST("/user/register", middleware.EnsureAutenticate(env), controller.Register)
+	g.POST("/user/register",
+		middleware.EnsureAutenticate(env),
+		middleware.EnsurePermission(scope.ScopeAdmin),
+		controller.Register)
 	g.GET("/user/info", middleware.EnsureAutenticate(env), controller.Info)
 	g.PUT("/user/password", middleware.EnsureAutenticate(env), controller.ChangePassword)
 	g.GET("/user",
