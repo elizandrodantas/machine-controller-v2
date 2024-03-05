@@ -1,0 +1,1211 @@
+definitions:
+  domain.AuthRequest:
+    properties:
+      password:
+        maxLength: 150
+        minLength: 6
+        type: string
+      username:
+        maxLength: 50
+        minLength: 3
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  domain.AuthResponse:
+    properties:
+      access_token:
+        type: string
+      expire:
+        type: integer
+      typen_type:
+        type: string
+    type: object
+  domain.HttpError:
+    properties:
+      message:
+        type: string
+    type: object
+  domain.Machine:
+    properties:
+      createdAt:
+        type: string
+      guid:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      os:
+        type: string
+      query:
+        type: string
+    type: object
+  domain.MachineData:
+    properties:
+      expire:
+        type: integer
+      guid:
+        type: string
+      name:
+        maxLength: 100
+        type: string
+      os:
+        maxLength: 100
+        type: string
+      service_id:
+        type: string
+    required:
+    - expire
+    - guid
+    - name
+    - os
+    - service_id
+    type: object
+  domain.MachineJson:
+    properties:
+      created_at:
+        type: string
+      guid:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      os:
+        type: string
+      query:
+        type: string
+    type: object
+  domain.MachineListResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/domain.MachineJson'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  domain.MachineResponse:
+    properties:
+      identify:
+        type: string
+      message:
+        type: string
+      name:
+        type: string
+      service_identify:
+        type: string
+      status:
+        type: string
+    type: object
+  domain.MachineRuleJson:
+    properties:
+      created_at:
+        type: string
+      expire:
+        type: integer
+      machine_id:
+        type: string
+      service_id:
+        type: string
+    type: object
+  domain.MachineUpdateNameRequest:
+    properties:
+      id:
+        type: string
+      name:
+        maxLength: 100
+        type: string
+    required:
+    - id
+    - name
+    type: object
+  domain.NotesCreateRequest:
+    properties:
+      machine_id:
+        type: string
+      text:
+        maxLength: 5000
+        minLength: 1
+        type: string
+    required:
+    - machine_id
+    - text
+    type: object
+  domain.NotesDeleteRequest:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  domain.NotesListJson:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      machine_id:
+        type: string
+      text:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: string
+      user_name:
+        type: string
+    type: object
+  domain.NotesListResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/domain.NotesListJson'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  domain.NotesUpdateRequest:
+    properties:
+      id:
+        type: string
+      text:
+        type: string
+    required:
+    - id
+    - text
+    type: object
+  domain.RuleActivesResponse:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/domain.RuleJoinServiceJson'
+        type: array
+      machine_id:
+        type: string
+      total:
+        type: integer
+    type: object
+  domain.RuleCreateRequest:
+    properties:
+      expire:
+        minimum: 0
+        type: integer
+      machine_id:
+        type: string
+      service_id:
+        type: string
+    required:
+    - expire
+    - machine_id
+    - service_id
+    type: object
+  domain.RuleCreateResponse:
+    properties:
+      expire:
+        type: integer
+      machine_id:
+        type: string
+      service_id:
+        type: string
+    type: object
+  domain.RuleHistoryResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/domain.MachineRuleJson'
+        type: array
+      machine_id:
+        type: string
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  domain.RuleJoinServiceJson:
+    properties:
+      created_at:
+        type: string
+      expire:
+        type: integer
+      machine_id:
+        type: string
+      service_id:
+        type: string
+      service_name:
+        type: string
+    type: object
+  domain.RuleListResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/domain.RuleJoinServiceJson'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  domain.RuleRemoveRequest:
+    properties:
+      machine_id:
+        type: string
+      service_id:
+        type: string
+    required:
+    - machine_id
+    - service_id
+    type: object
+  domain.ServiceCreateRequest:
+    properties:
+      description:
+        type: string
+      name:
+        maxLength: 50
+        minLength: 3
+        type: string
+    required:
+    - name
+    type: object
+  domain.ServiceJson:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  domain.ServiceListResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/domain.ServiceJson'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  domain.ServiceRemoveRequest:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  domain.UserChangePasswordRequest:
+    properties:
+      password:
+        maxLength: 150
+        minLength: 6
+        type: string
+    required:
+    - password
+    type: object
+  domain.UserChangePasswordResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  domain.UserCremoveScopeRequest:
+    properties:
+      scope:
+        type: string
+      user_id:
+        type: string
+    required:
+    - scope
+    - user_id
+    type: object
+  domain.UserJson:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      name:
+        type: string
+      scope:
+        items:
+          type: string
+        type: array
+      status:
+        type: boolean
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+  domain.UserListResponse:
+    properties:
+      count:
+        type: integer
+      data:
+        items:
+          $ref: '#/definitions/domain.UserJson'
+        type: array
+      page:
+        type: integer
+      total:
+        type: integer
+    type: object
+  domain.UserRegisterRequest:
+    properties:
+      name:
+        maxLength: 50
+        type: string
+      password:
+        maxLength: 150
+        minLength: 6
+        type: string
+      username:
+        maxLength: 50
+        minLength: 3
+        type: string
+    required:
+    - password
+    - username
+    type: object
+info:
+  contact:
+    email: dantaspm@icloud.com
+    name: Elizandro Dantas
+    url: https://www.linkedin.com/in/elizandrodantas
+  description: This is the API documentation for the Machine Controller API.
+  termsOfService: http://swagger.io/terms/
+  title: Machine Controller API
+  version: "2.0"
+paths:
+  /auth:
+    post:
+      consumes:
+      - application/json
+      description: Authenticate a user
+      parameters:
+      - description: AuthRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.AuthRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.AuthResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      summary: Authenticate a user
+      tags:
+      - Auth
+  /machine:
+    get:
+      consumes:
+      - application/json
+      description: List machines
+      parameters:
+      - default: 0
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Filter by machine ID
+        in: query
+        name: machine_id
+        type: string
+      - description: Filter by OS
+        in: query
+        name: os
+        type: string
+      - description: Filter with query
+        in: query
+        name: q
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.MachineListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: List machines
+      tags:
+      - Machine
+    post:
+      consumes:
+      - application/json
+      description: Machine registration
+      parameters:
+      - description: MachineData
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.MachineData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.MachineResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/domain.MachineResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      summary: Machine registration
+      tags:
+      - Machine
+  /machine/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get machine detail
+      parameters:
+      - description: Machine ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Machine'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Get machine detail
+      tags:
+      - Machine
+  /machine/update-name:
+    put:
+      consumes:
+      - application/json
+      description: Update machine name
+      parameters:
+      - description: MachineUpdateNameRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.MachineUpdateNameRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Update machine name
+      tags:
+      - Machine
+  /notes/{id}:
+    get:
+      consumes:
+      - application/json
+      description: List notes
+      parameters:
+      - description: Machine ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.NotesListResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: List notes
+      tags:
+      - Notes
+  /notes/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a note
+      parameters:
+      - description: NotesCreateRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.NotesCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Create a note
+      tags:
+      - Notes
+  /notes/delete:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a note
+      parameters:
+      - description: NotesDeleteRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.NotesDeleteRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Delete a note
+      tags:
+      - Notes
+  /notes/update:
+    put:
+      consumes:
+      - application/json
+      description: Update a note
+      parameters:
+      - description: NotesUpdateRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.NotesUpdateRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Update a note
+      tags:
+      - Notes
+  /rule:
+    get:
+      consumes:
+      - application/json
+      description: List rules
+      parameters:
+      - default: 0
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.RuleListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: List rules
+      tags:
+      - Rule
+  /rule/actives/{machine_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get actives rules
+      parameters:
+      - description: Machine ID
+        in: path
+        name: machine_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.RuleActivesResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Get actives rules
+      tags:
+      - Rule
+  /rule/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a rule
+      parameters:
+      - description: RuleCreateRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.RuleCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.RuleCreateResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Create a rule
+      tags:
+      - Rule
+  /rule/history/{machine_id}:
+    get:
+      consumes:
+      - application/json
+      description: Get rules history
+      parameters:
+      - description: Machine ID
+        in: path
+        name: machine_id
+        required: true
+        type: string
+      - description: Filter by service ID
+        in: query
+        name: service
+        type: string
+      - default: 0
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.RuleHistoryResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Get rules history
+      tags:
+      - Rule
+  /rule/remove:
+    delete:
+      consumes:
+      - application/json
+      description: Remove a rule
+      parameters:
+      - description: RuleRemoveRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.RuleRemoveRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Remove a rule
+      tags:
+      - Rule
+  /service:
+    get:
+      consumes:
+      - application/json
+      description: List services
+      parameters:
+      - default: 0
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.ServiceListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: List services
+      tags:
+      - Service
+  /service/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove a service
+      parameters:
+      - description: ServiceRemoveRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.ServiceRemoveRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Remove a service
+      tags:
+      - Service
+  /service/create:
+    post:
+      consumes:
+      - application/json
+      description: Create a service
+      parameters:
+      - description: ServiceCreateRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.ServiceCreateRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Create a service
+      tags:
+      - Service
+  /user:
+    get:
+      consumes:
+      - application/json
+      description: List users
+      parameters:
+      - default: 0
+        description: Page number
+        in: query
+        name: page
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.UserListResponse'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: List users
+      tags:
+      - User
+  /user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get user info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.UserJson'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Get user info
+      tags:
+      - User
+  /user/{id}/enable:
+    put:
+      consumes:
+      - application/json
+      description: Change user status
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Change user status
+      tags:
+      - User
+  /user/{userId}/scope:
+    delete:
+      consumes:
+      - application/json
+      description: Manage user scopes
+      parameters:
+      - description: UserCremoveScopeRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UserCremoveScopeRequest'
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Manage user scopes
+      tags:
+      - User
+  /user/change-password:
+    put:
+      consumes:
+      - application/json
+      description: Change user password
+      parameters:
+      - description: UserChangePasswordRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UserChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.UserChangePasswordResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Change user password
+      tags:
+      - User
+  /user/register:
+    post:
+      consumes:
+      - application/json
+      description: Register a user
+      parameters:
+      - description: UserRegisterRequest
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/domain.UserRegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/domain.HttpError'
+      security:
+      - JWT: []
+      summary: Register a user
+      tags:
+      - User
+securityDefinitions:
+  JWT:
+    in: header
+    name: token
+    type: apiKey
+swagger: "2.0"

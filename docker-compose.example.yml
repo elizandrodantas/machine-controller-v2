@@ -1,0 +1,53 @@
+version: '3.5'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    expose:
+      - 3000
+    restart: "always"
+    environment:
+      - DB_URL: "postgres://admin:123@db:5432/api"
+      - WEB_PORT: :3000
+      - TIMEOUT: 10
+      - TOKEN_TYPE: Bearer
+      - JWT_TOKEN: test
+      - JWT_EXPIRE_HOUR: 1
+      - ENVIRONMENT: development
+    depends_on:
+      - db
+    deploy:
+      resources:
+        limits:
+          cpus: "0.40"
+          memory: "200MB"
+
+  db:
+    image: "postgres:15"
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=admin
+      - POSTGRES_DB=api
+    volumes:
+      - init.sql:/docker-entrypoint-initdb.d/init.sql
+      - postgres_data:/var/lib/postgresql/data
+    command: "postgres -c checkpoint_timeout=600 -c max_wal_size=4096 -c max_connections=350 -c effective_cache_size=1GB"
+    deploy:
+      resources:
+        limits:
+          cpus: "0.60"
+          memory: "600MB"
+
+networks:
+  default:
+    driver: bridge
+    name: machine-api-network
+
+volumes:
+  postgres_data:

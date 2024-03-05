@@ -1,0 +1,5 @@
+*.exe
+.env
+/tmp
+docker-compose.yml
+docker-compose.yml

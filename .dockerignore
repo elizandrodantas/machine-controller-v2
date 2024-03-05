@@ -1,0 +1,7 @@
+*.yml
+*.bat
+*.sql
+*.sh
+/tmp
+*.exe
+.env
