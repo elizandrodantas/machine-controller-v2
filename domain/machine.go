@@ -22,7 +22,7 @@ type Machine struct {
 }
 
 type MachineData struct {
-	Guid      string `json:"guid" binding:"required,uuid4"`
+	Guid      string `json:"guid" binding:"required,uuid"`
 	Name      string `json:"name" binding:"required,max=100"`
 	OS        string `json:"os" binding:"required,max=100"`
 	Expire    int    `json:"expire" binding:"required"`
