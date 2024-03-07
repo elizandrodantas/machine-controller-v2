@@ -22,20 +22,20 @@ type Machine struct {
 }
 
 type MachineData struct {
-	Guid      string `json:"guid" binding:"required,uuid"`
-	Name      string `json:"name" binding:"required,max=100"`
-	OS        string `json:"os" binding:"required,max=100"`
-	Expire    int    `json:"expire" binding:"required"`
-	ServiceId string `json:"service_id" binding:"required,uuid4"`
+	Guid      string `json:"guid" validate:"required,uuid"`
+	Name      string `json:"name" validate:"required,max=100"`
+	OS        string `json:"os" validate:"required,max=100"`
+	Expire    int    `json:"expire" validate:"required"`
+	ServiceId string `json:"service_id" validate:"required,uuid4"`
 }
 
 type MachineRequest struct {
-	Data string `json:"data" binding:"required,min=32,base64"`
+	Data string `json:"data" validate:"required,min=32,base64"`
 }
 
 type MachineUpdateNameRequest struct {
-	Name string `json:"name" binding:"required,max=100"`
-	Id   string `json:"id" binding:"required,uuid4"`
+	Name string `json:"name" validate:"required,max=100"`
+	Id   string `json:"id" validate:"required,uuid4"`
 }
 
 type MachineResponse struct {
@@ -57,10 +57,10 @@ type MachineJson struct {
 }
 
 type MachineListQuerys struct {
-	MachineId string `form:"machine_id" json:"machine_id" binding:"omitempty,uuid4"`
-	Query     string `form:"q" json:"q" binding:"omitempty,max=100"`
-	Page      int    `form:"page" json:"page" binding:"omitempty"`
-	OS        string `form:"os" json:"os" binding:"omitempty,max=100"`
+	MachineId string `form:"machine_id" json:"machine_id" validate:"omitempty,uuid4"`
+	Query     string `form:"q" json:"q" validate:"omitempty,max=100"`
+	Page      int    `form:"page" json:"page" validate:"omitempty"`
+	OS        string `form:"os" json:"os" validate:"omitempty,max=100"`
 }
 
 type MachineListResponse struct {

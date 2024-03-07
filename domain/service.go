@@ -20,7 +20,7 @@ type ServiceJson struct {
 }
 
 type ServiceCreateRequest struct {
-	Name        string `json:"name" binding:"required,gte=3,lte=50"`
+	Name        string `json:"name" validate:"required,gte=3,lte=50"`
 	Description string `json:"description"`
 }
 
@@ -32,7 +32,7 @@ type ServiceListResponse struct {
 }
 
 type ServiceRemoveRequest struct {
-	ID string `json:"id" binding:"required,uuid"`
+	ID string `json:"id" validate:"required,uuid"`
 }
 
 type ServiceRepository interface {

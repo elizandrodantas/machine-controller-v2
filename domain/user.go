@@ -37,9 +37,9 @@ type UserCreate struct {
 }
 
 type UserRegisterRequest struct {
-	Name     string `json:"name" binding:"alphanum,max=50"`
-	Username string `json:"username" binding:"required,min=3,max=50"`
-	Password string `json:"password" binding:"required,min=6,max=150"`
+	Name     string `json:"name" validate:"alphanum,max=50"`
+	Username string `json:"username" validate:"required,min=3,max=50"`
+	Password string `json:"password" validate:"required,min=6,max=150"`
 }
 
 type UserListResponse struct {
@@ -50,7 +50,7 @@ type UserListResponse struct {
 }
 
 type UserChangePasswordRequest struct {
-	NewPassword string `json:"password" binding:"required,min=6,max=150"`
+	NewPassword string `json:"password" validate:"required,min=6,max=150"`
 }
 
 type UserChangePasswordResponse struct {
@@ -58,8 +58,8 @@ type UserChangePasswordResponse struct {
 }
 
 type UserCremoveScopeRequest struct {
-	Scope  string `json:"scope" binding:"required"`
-	UserId string `json:"user_id" binding:"required,uuid"`
+	Scope  string `json:"scope" validate:"required"`
+	UserId string `json:"user_id" validate:"required,uuid"`
 }
 
 type UserRepository interface {

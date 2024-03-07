@@ -5,4 +5,4 @@ if exist run.exe (
     echo run.exe deletado.
 )
 
-air --build.cmd "go build -o run.exe cmd/main.go" --build.exclude_dir cli --build.bin "run.exe"
+air --build.cmd "go build -o run.exe ./cmd/cli/." --build.bin "run.exe api"

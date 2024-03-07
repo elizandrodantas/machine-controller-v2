@@ -20,9 +20,9 @@ type MachineRuleJson struct {
 }
 
 type RuleCreateRequest struct {
-	MachineId string `json:"machine_id" binding:"required,uuid4"`
-	ServiceId string `json:"service_id" binding:"required,uuid4"`
-	Expire    int    `json:"expire" binding:"required,gte=0"`
+	MachineId string `json:"machine_id" validate:"required,uuid4"`
+	ServiceId string `json:"service_id" validate:"required,uuid4"`
+	Expire    int    `json:"expire" validate:"required,gte=0"`
 }
 
 type RuleCreateResponse struct {
@@ -69,8 +69,8 @@ type RuleListResponse struct {
 }
 
 type RuleRemoveRequest struct {
-	MachineId string `json:"machine_id" binding:"required,uuid4"`
-	ServiceId string `json:"service_id" binding:"required,uuid4"`
+	MachineId string `json:"machine_id" validate:"required,uuid4"`
+	ServiceId string `json:"service_id" validate:"required,uuid4"`
 }
 
 type RuleUsecase interface {

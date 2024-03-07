@@ -35,8 +35,8 @@ type NotesListJson struct {
 }
 
 type NotesCreateRequest struct {
-	Text      string `json:"text" binding:"required,min=1,max=5000"`
-	MachineId string `json:"machine_id" binding:"required,uuid"`
+	Text      string `json:"text" validate:"required,min=1,max=5000"`
+	MachineId string `json:"machine_id" validate:"required,uuid"`
 }
 
 type NotesListResponse struct {
@@ -47,12 +47,12 @@ type NotesListResponse struct {
 }
 
 type NotesUpdateRequest struct {
-	Text string `json:"text" binding:"required"`
-	ID   string `json:"id" binding:"required,uuid"`
+	Text string `json:"text" validate:"required"`
+	ID   string `json:"id" validate:"required,uuid"`
 }
 
 type NotesDeleteRequest struct {
-	ID string `json:"id" binding:"required,uuid"`
+	ID string `json:"id" validate:"required,uuid"`
 }
 
 type NotesRepository interface {

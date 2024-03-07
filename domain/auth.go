@@ -5,8 +5,8 @@ import (
 )
 
 type AuthRequest struct {
-	Username string `json:"username" binding:"required,min=3,max=50"`
-	Password string `json:"password" binding:"required,min=6,max=150"`
+	Username string `json:"username" validate:"required,min=3,max=50"`
+	Password string `json:"password" validate:"required,min=6,max=150"`
 }
 
 type AuthResponse struct {
