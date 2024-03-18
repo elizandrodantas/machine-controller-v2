@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/elizandrodantas/machine-controller-v2/domain"
 	"github.com/jackc/pgx/v5"
@@ -52,16 +53,21 @@ func (r *ruleRepository) Create(ctx context.Context, machineId, serviceId string
 	return nil
 }
 
-func (r *ruleRepository) List(ctx context.Context, page int) ([]domain.RuleJoinService, error) {
+func (r *ruleRepository) List(ctx context.Context, page int, oact bool) ([]domain.RuleJoinService, error) {
 	pool, err := r.Conn.Acquire(ctx)
 	if err != nil {
 		return nil, err
 	}
 	defer pool.Release()
 
+	onlyActiveCondition := ""
+	if oact {
+		onlyActiveCondition = "WHERE mr.expire > EXTRACT(EPOCH FROM CURRENT_TIMESTAMP)::INTEGER "
+	}
+
 	rows, err := pool.Query(ctx,
-		"SELECT s.name as service_name, mr.* FROM machine_rules mr INNER JOIN services s ON s.id = mr.service_id "+
-			"ORDER BY mr.created_at DESC LIMIT 10 OFFSET $1",
+		fmt.Sprintf("SELECT s.name as service_name, mr.* FROM machine_rules mr INNER JOIN services s ON s.id = mr.service_id %s"+
+			"ORDER BY mr.created_at DESC LIMIT 10 OFFSET $1", onlyActiveCondition),
 		page*10)
 
 	if err != nil {
@@ -183,4 +189,22 @@ func (r ruleRepository) Invalidate(ctx context.Context, machineId, serviceId str
 	}
 
 	return nil
+}
+
+func (r *ruleRepository) CountOnlyActives(ctx context.Context) (int, error) {
+	pool, err := r.Conn.Acquire(ctx)
+	if err != nil {
+		return 0, err
+	}
+	defer pool.Release()
+
+	var count int
+	err = pool.QueryRow(ctx,
+		"SELECT COUNT(*) FROM machine_rules WHERE expire > EXTRACT(EPOCH FROM CURRENT_TIMESTAMP)::INTEGER").Scan(&count)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return count, nil
 }

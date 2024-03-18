@@ -65,8 +65,8 @@ func (r *ruleUsecase) History(ctx context.Context, machineId string, serviceId s
 	return response, nil
 }
 
-func (r *ruleUsecase) List(ctx context.Context, page int) ([]domain.RuleJoinServiceJson, error) {
-	list, err := r.RuleRepository.List(ctx, page)
+func (r *ruleUsecase) List(ctx context.Context, page int, oact bool) ([]domain.RuleJoinServiceJson, error) {
+	list, err := r.RuleRepository.List(ctx, page, oact)
 	if err != nil {
 		return nil, err
 	}
@@ -111,4 +111,8 @@ func (r *ruleUsecase) Actives(ctx context.Context, machineId string) ([]domain.R
 
 func (r *ruleUsecase) Remove(ctx context.Context, machineId, serviceId string) error {
 	return r.RuleRepository.Invalidate(ctx, machineId, serviceId)
+}
+
+func (r *ruleUsecase) CountOnlyActives(ctx context.Context) (int, error) {
+	return r.RuleRepository.CountOnlyActives(ctx)
 }

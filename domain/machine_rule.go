@@ -78,10 +78,11 @@ type RuleUsecase interface {
 	History(ctx context.Context, machineId string, serviceId string, page int) ([]MachineRuleJson, error)
 	Count(ctx context.Context) (int, error)
 	CountByMachineId(ctx context.Context, machineId string, serviceId string) (int, error)
-	List(ctx context.Context, page int) ([]RuleJoinServiceJson, error)
+	List(ctx context.Context, page int, onlyActives bool) ([]RuleJoinServiceJson, error)
 	Remove(ctx context.Context, machineId, serviceId string) error
 	Actives(ctx context.Context, machineId string) ([]RuleJoinServiceJson, error)
 	ActiveByMachineIdAndServiceId(ctx context.Context, machineId, serviceId string) (*MachineRule, error)
+	CountOnlyActives(ctx context.Context) (int, error)
 }
 
 type RuleRepository interface {
@@ -89,8 +90,9 @@ type RuleRepository interface {
 	History(ctx context.Context, machineId string, serviceId string, page int) ([]MachineRule, error)
 	Count(ctx context.Context) (int, error)
 	CountByMachineId(ctx context.Context, machineId string, serviceId string) (int, error)
-	List(ctx context.Context, page int) ([]RuleJoinService, error)
+	List(ctx context.Context, page int, onlyActives bool) ([]RuleJoinService, error)
 	Invalidate(ctx context.Context, machineId, serviceId string) error
 	Actives(ctx context.Context, machineId string) ([]RuleJoinService, error)
 	ActiveByMachineIdAndServiceId(ctx context.Context, machineId, serviceId string) (*MachineRule, error)
+	CountOnlyActives(ctx context.Context) (int, error)
 }

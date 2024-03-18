@@ -31,14 +31,26 @@ func (r *RuleController) List(g *gin.Context) {
 		page = 0
 	}
 
-	list, err := r.RuleUsecase.List(ctx, page)
+	onlyActives, err := strconv.ParseBool(g.DefaultQuery("onlyActives", "false"))
+	if err != nil {
+		onlyActives = false
+	}
+
+	list, err := r.RuleUsecase.List(ctx, page, onlyActives)
 	if err != nil {
 		g.JSON(http.StatusInternalServerError, domain.ErrorHttpMessageFromError(domain.ErrInternalError))
 		return
 	}
 
 	count := len(list)
-	total, err := r.RuleUsecase.Count(ctx)
+	total := 0
+
+	if !onlyActives {
+		total, err = r.RuleUsecase.Count(ctx)
+	} else {
+		total, err = r.RuleUsecase.CountOnlyActives(ctx)
+	}
+
 	if err != nil {
 		total = count
 	}
