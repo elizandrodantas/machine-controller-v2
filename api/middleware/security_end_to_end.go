@@ -47,7 +47,7 @@ func SecurityEndToEnd(env *config.Env) gin.HandlerFunc {
 			return
 		}
 
-		c.Set("data", decrypted)
+		c.Set("data", string(decrypted))
 		c.Next()
 	}
 }
