@@ -14,6 +14,7 @@ import (
 )
 
 // MachineAuthorization is a middleware function that performs authorization checks for machine requests.
+// deprecated [v2.0.1]: MachineAuthorization is deprecated and should not be used.
 func MachineAuthorization(env *config.Env) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// IF DEVELOPER MODE IS ENABLED, THE MACHINE DATA IS NOT ENCRYPTED
