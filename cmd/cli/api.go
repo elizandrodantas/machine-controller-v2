@@ -77,6 +77,7 @@ func APIResolve(env *config.Env, pool *pgxpool.Pool) {
 	router.NewRuleRouter(baseUrl, env, pool, timeout)
 	router.NewServiceRouter(baseUrl, env, pool, timeout)
 	router.NewNotesRouter(baseUrl, env, pool, timeout)
+	router.NewInspectRouter(baseUrl, env, pool, timeout)
 
 	engine.Run(env.WEB_PORT)
 }
